@@ -3,14 +3,8 @@ import styles from "./TarjetaFruta.module.css";
 import PropTypes from "prop-types";
 
 class TarjetaFruta extends React.Component {
-  static propTypes = {
-    name: PropTypes.string,
-    price: PropTypes.number,
-  };
-
   state = {
     cantidad: 0,
-    fruta: this.props.fruta,
   };
 
   agregar = () => {
@@ -31,8 +25,12 @@ class TarjetaFruta extends React.Component {
     });
   };
 
+  static defaultProps = {
+    fruta: { id: 0, name: "Cambur", price: 4 },
+  };
+
   render() {
-    const { name, price } = this.state.fruta;
+    const { name, price } = this.props.fruta;
     const { cantidad } = this.state;
 
     const hasItems = cantidad > 0;
@@ -54,4 +52,10 @@ class TarjetaFruta extends React.Component {
   }
 }
 
+TarjetaFruta.propTypes = {
+  fruta: PropTypes.shape({
+    name: PropTypes.string,
+    price: PropTypes.number,
+  }),
+};
 export default TarjetaFruta;
